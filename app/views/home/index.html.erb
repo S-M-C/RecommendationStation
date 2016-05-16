@@ -9,10 +9,31 @@
   </script>
 <% end %>
 
-<h2>Products</h2>
+<h1><b><u>Welcome to Recommendation Station!</u></b></h1>
 
-<ul>
-  <% @products.each do |product| %>
-    <li><%= link_to product.title, "https://#{@shop_session.url}/admin/products/#{product.id}", target: "_top" %></li>
-  <% end %>
-</ul>
+<h2>To view recommendations for a specific product, just click on its name.</h2>
+<div id="product_table">
+  <table>
+    <tr>
+      <th>Product</th>
+      <th>Name</th>
+      <th>Matches</th>
+    </tr>
+    
+    <% @products.each do |product| %>
+      <tr>
+        
+        <td>
+          <img src = "<%= product.images[0].src %>" alt = "<%= product.title %>" style = "width:50px;height:50px;" >
+        </td> 
+          
+        <td>
+          <%= link_to product.title, "https://#{@shop_session.url}/admin/products/#{product.id}", target: "_top" %>
+        </td> 
+        
+        <td>0</td> <!--This will be the number of matches found for the product-->
+      </tr>
+    <% end %>
+    
+  </table>
+</div>
