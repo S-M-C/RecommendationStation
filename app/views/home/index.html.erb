@@ -1,3 +1,5 @@
+<%= stylesheet_link_tag "index.css" %>
+
 <% content_for :javascript do %>
   <script type="text/javascript">
     ShopifyApp.ready(function(){
@@ -31,7 +33,11 @@
           <%= link_to product.title, "https://#{@shop_session.url}/admin/products/#{product.id}", target: "_top" %>
         </td> 
         
-        <td>0</td> <!--This will be the number of matches found for the product-->
+        <td>
+          <a href="#" onclick="newModal('<%= rec_modal_url %>','Recomendations for <%=product.title%>',250,75)">
+            <%=get_number_of_matches(product.id)%>
+          </a>
+        </td> <!--This will be the number of matches found for the product-->
       </tr>
     <% end %>
     
