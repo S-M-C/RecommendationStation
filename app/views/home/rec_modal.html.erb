@@ -1,0 +1,22 @@
+<%= stylesheet_link_tag "rec_modal.css" %>
+
+<table>
+    <tr>
+      <th>Product</th>
+      <th>Name</th>
+    </tr>
+    
+    <% @products.each do |product| %>
+      <tr>
+        
+        <td>
+          <img src = "<%= product.images[0].src %>" alt = "<%= product.title %>" style = "width:50px;height:50px;" >
+        </td> 
+          
+        <td>
+          <%= link_to product.title, "https://#{@shop_session.url}/admin/products/#{product.id}", target: "_top" %>
+        </td> 
+      </tr>
+    <% end %>
+    
+  </table>
