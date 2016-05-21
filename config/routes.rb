@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get 'product/about'
+
   mount ShopifyApp::Engine, at: '/'
   
   get 'rec_modal' => "home#rec_modal", :as => :rec_modal
