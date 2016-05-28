@@ -1,9 +1,67 @@
+<html>
+<head>
+<style> 
+#div1 {width:350px;height:70px;padding:10px;border:1px solid #aaaaaa;}
+</style>
+<script>
+function allowDrop(ev) {
+    ev.preventDefault();
+}
+
+function drag(ev) {
+    ev.dataTransfer.setData("text", ev.target.id);
+}
+
+function drop(ev) {
+    ev.preventDefault();
+    var data = ev.dataTransfer.getData("text");
+    ev.target.appendChild(document.getElementById(data));
+}
+</script>
+</head>
+
+
+<link rel = "stylesheet" type = text/css href ="product_view.css"/>
 <h1>Product#about</h1>
 <p>Find me in app/views/product/about.html.erb</p>
 <!--Recommendation Page-->
 
-<head>
+<h1>
 	<title>Recommended Products</title>
-</head>
+</h1>
 
-<p><%= @product[0].title %></p>
+<h1><%= @product[0].title %></h1>
+<img src = "/admin/products/#{id}/images/#{id}.json" alt = "Product Image" /> 
+<h1> Number of Related Products: </h1>
+
+<h1> Related Products </h1> 
+
+<table>
+<th>Product Image</th>
+<th> Product </th>
+<th> # of matches </th>
+<tr>
+<td> <img id="drag1" img src = "D:\Git\RecommendationStation\app\views\product\guitar_0.jpg" width="100" height="100" draggable="true" ondragstart="drag(event)"  alt = "Product Image"> </td>
+<td> "title" </td>
+<td> # </td>
+</tr>
+<tr>
+<td> <img id="drag2" img src = "D:\Git\RecommendationStation\app\views\product\pillow.jpg" width="100" height="100" draggable="true" ondragstart="drag(event)"  alt = "Product Image"> </td>
+<td> "title" </td>
+<td> # </td>
+</tr>
+<tr>
+<td> <img id="drag3" img src = "D:\Git\RecommendationStation\app\views\product\untitled.png" width="100" height="100" draggable="true" ondragstart="drag(event)"  alt = "Product Image"> </td>
+<td> "title" </td>
+<td> # </td>
+</tr> 
+</table> 
+
+<h1> Suggested </h1>
+<div id="div1" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+<br>
+
+
+
+
+</html> 
