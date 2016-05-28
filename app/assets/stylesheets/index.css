@@ -1,32 +1,31 @@
+body {
+    font-family: ‘Trebuchet MS’, Helvetica, sans-serif;
+}
+
 table { 
 color: #333;
-font-family: Helvetica, Arial, sans-serif;
 width: 1000px; 
-border-collapse: 
-collapse; border-spacing: 0; 
+border-collapse: collapse; 
+border-spacing: 0; 
 }
 
 td, th { 
-border: 1px solid transparent;  /*No more visible border */
+border-bottom: 1px solid #e6e6e6;
 height: 30px; 
 }
 
 th {
-background: #DFDFDF;  /* Darken header a bit */
+background: #e6e6e6;  /* Darken header a bit */
 font-weight: bold;
+color: #3366ff;
 }
 
 td {
-background: #FAFAFA;
+background: #ffffff;
 text-align: center;
 }
 
-/* this creates the stripe effect */ 
-tr:nth-child(even) td { background: #F1F1F1; }   
-tr:nth-child(odd) td { background: #FEFEFE; }  
-
 #product_table {
-     border:1px solid black;
      display: inline-block;
      margin-top: 0.75cm;
      background-color: #ffffff
@@ -51,4 +50,35 @@ tr:nth-child(odd) td { background: #FEFEFE; }
     margin-top: 1cm;
     margin-left: 1cm;
     margin-right: 1cm;
+}
+
+input {
+    font-size: 22px;
+}
+
+input[type=submit] {
+    background-color: #ffffff;
+    color: #3366ff;
+    border: 1px solid #e6e6e6;
+}
+
+input[type=submit]:hover
+{
+  background-color: #3366ff;
+  color: #ffffff;
+}
+
+input[type=text] {
+    background-color: #ffffff;
+    color: black;
+    border: 1px solid #e6e6e6;
+}
+
+#search_block2{
+    float: right;
+}
+
+#search_block1, #search_block2
+{
+    display:inline;
 }
