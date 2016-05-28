@@ -1,7 +1,7 @@
 table { 
 color: #333;
 font-family: Helvetica, Arial, sans-serif;
-width: 640px; 
+width: 1000px; 
 border-collapse: 
 collapse; border-spacing: 0; 
 }
@@ -28,4 +28,27 @@ tr:nth-child(odd) td { background: #FEFEFE; }
 #product_table {
      border:1px solid black;
      display: inline-block;
+     margin-top: 0.75cm;
+     background-color: #ffffff
+}
+
+#product_panel { 
+    display: table;
+    margin: 0 auto;
+    background-color: #ffffff
+    width = 1000;
+    
+}
+
+#product_panel_inner {
+    margin-top: 1cm;
+    
+}
+
+#outer_div {
+    background-color: #ffffff;
+    height: 500px; 
+    margin-top: 1cm;
+    margin-left: 1cm;
+    margin-right: 1cm;
 }
