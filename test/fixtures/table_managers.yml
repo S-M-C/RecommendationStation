@@ -1,0 +1,27 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  title: 
+  text: 
+  this: MyString
+  model: MyString
+  for: MyString
+  updating: MyString
+  contents: MyString
+  of: MyString
+  a: MyString
+  product: MyString
+  table: MyString
+
+two:
+  title: 
+  text: 
+  this: MyString
+  model: MyString
+  for: MyString
+  updating: MyString
+  contents: MyString
+  of: MyString
+  a: MyString
+  product: MyString
+  table: MyString
