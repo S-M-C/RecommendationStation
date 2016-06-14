@@ -6,15 +6,12 @@ class HomeController < ShopifyApp::AuthenticatedController
   def index # will need to filter on pages
     limit = 10
     keyword = params[:keyword]
-    if not keyword.nil? and not keyword.empty?
-      keyword.strip!
-    end
     collection = params[:collection]
     type = params[:type]
 
     # add each non empty field to filter calls
     @collections = ShopifyAPI::CustomCollection.find(:all,:params => {:limit => 10}).map{|collection| [collection.title]}.uniq.delete_if{|type| type[0].nil? || type[0].empty?}
-    @types = ["Any"]+ShopifyAPI::Product.find(:all, :params => {:limit => 10 }).map{|product| [product.product_type]}.uniq.delete_if{|type| type[0].nil? || type[0].empty?}
+    @types = ShopifyAPI::Product.find(:all, :params => {:limit => 10 }).map{|product| [product.product_type]}.uniq.delete_if{|type| type[0].nil? || type[0].empty?}
 
     products_type = get_products_by_type(type, limit)
     products_kwrd = get_products_by_kwrd(keyword, limit)
@@ -23,7 +20,6 @@ class HomeController < ShopifyApp::AuthenticatedController
     args = []
     for item in [products_type, products_coll, products_kwrd]
       unless item.nil? # filtering is soooo close !
-        print "x---------------------------"
         args.append(item)
       end
     end
@@ -33,12 +29,14 @@ class HomeController < ShopifyApp::AuthenticatedController
   end
 
   def get_products_by_kwrd(keyword, lim)
+    unless keyword.nil? or keyword.empty?
+      keyword.strip
+    end
     ShopifyAPI::Product.find(:all, :params => {:limit => lim, :title => keyword } )
   end
 
   def get_products_by_type(type, lim)
-    print type
-    if type != "Any"
+    unless type.nil? or type.empty?
       result = ShopifyAPI::Product.find(:all, :params => {:limit => lim, :product_type => type } )
     else
       result = nil
@@ -47,8 +45,7 @@ class HomeController < ShopifyApp::AuthenticatedController
   end
 
   def get_products_by_coll(collection, lim)
-    print collection
-     if collection != "Any"
+    unless collection.nil? or collection.empty?
       current_collection = ShopifyAPI::CustomCollection.find(:all, :params => {:limit => lim, :title => collection })[0]
       result = current_collection.products
     else
@@ -62,7 +59,6 @@ class HomeController < ShopifyApp::AuthenticatedController
   end
 
   def search
-    puts "hello world"
     redirect_to "/index"
   end
   

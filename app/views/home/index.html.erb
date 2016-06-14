@@ -27,7 +27,7 @@
   <%= select_tag(:collection,options_for_select(@collections,params[:collection]),{:include_blank => 'Any'}) %>  
             &ensp;&ensp;    
             <%= label_tag(:type,"Type:") %>
-            <%= select_tag(:type,options_for_select(@types,params[:type]),{:include_blank => 'None'}) %>
+            <%= select_tag(:type,options_for_select(@types,params[:type]),{:include_blank => 'Any'}) %>
           </div>
         <% end %>
 
