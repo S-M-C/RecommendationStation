@@ -17,17 +17,19 @@
         <div id="product_panel_inner">
 
 <%= form_tag("/index", method: "get") do %>
-          <div id = "search_block1">
-            <%= submit_tag("Search") %>
-  <%= text_field_tag(:keyword, params[:keyword]) %>
-            &ensp;&ensp;
-          </div>
-          <div id="search_block2">
-            <%= label_tag(:collection,"Collections:") %>
+          <div id = "search_block_outer">
+            <div id = "search_block1">
+              <%= submit_tag("Search") %>
+               <%= text_field_tag(:keyword, params[:keyword]) %>
+                &ensp;&ensp;
+            </div>
+            <div id="search_block2">
+              <%= label_tag(:collection,"Collections:") %>
   <%= select_tag(:collection,options_for_select(@collections,params[:collection]),{:include_blank => 'Any'}) %>  
-            &ensp;&ensp;    
-            <%= label_tag(:type,"Type:") %>
+                &ensp;&ensp;    
+              <%= label_tag(:type,"Type:") %>
             <%= select_tag(:type,options_for_select(@types,params[:type]),{:include_blank => 'Any'}) %>
+            </div>
           </div>
         <% end %>
 
@@ -76,7 +78,7 @@
             <% end %>
             
           </table>
-        </div
+        </div>
       </div>
     </div>
   </div>
