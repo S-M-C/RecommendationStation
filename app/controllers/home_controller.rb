@@ -1,7 +1,4 @@
 class HomeController < ShopifyApp::AuthenticatedController
-  # get filtering working
-  # multi paging
-  # refactor and cleanup
   
   def index # will need to filter on pages
     limit = 10
@@ -10,8 +7,8 @@ class HomeController < ShopifyApp::AuthenticatedController
     type = params[:type]
 
     # add each non empty field to filter calls
-    @collections = ShopifyAPI::CustomCollection.find(:all,:params => {:limit => 10}).map{|collection| [collection.title]}.uniq.delete_if{|type| type[0].nil? || type[0].empty?}
-    @types = ShopifyAPI::Product.find(:all, :params => {:limit => 10 }).map{|product| [product.product_type]}.uniq.delete_if{|type| type[0].nil? || type[0].empty?}
+    @collections = ShopifyAPI::CustomCollection.find(:all).map{|collection| [collection.title]}.uniq.delete_if{|type| type[0].nil? || type[0].empty?}
+    @types = ShopifyAPI::Product.find(:all).map{|product| [product.product_type]}.uniq.delete_if{|type| type[0].nil? || type[0].empty?}
 
     products_type = get_products_by_type(type, limit)
     products_kwrd = get_products_by_kwrd(keyword, limit)

@@ -30,6 +30,10 @@
               <%= label_tag(:type,"Type:") %>
             <%= select_tag(:type,options_for_select(@types,params[:type]),{:include_blank => 'Any'}) %>
             </div>
+            <div id="per_page_block">
+              <%= label_tag(:limit, "Limit Per Page:") %>
+              <%= select_tag(:type,options_for_select(1...51)) %>
+           </div>
           </div>
         <% end %>
 

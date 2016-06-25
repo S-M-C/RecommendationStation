@@ -90,7 +90,6 @@ input[type=text] {
     float: right;
 }
 
-#search_block1, #search_block2
-{
-    display:inline;
+#search_block1, #search_block2, #per_page_block {
+    display: inline;
 }
