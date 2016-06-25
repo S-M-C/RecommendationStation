@@ -32,7 +32,7 @@
             </div>
             <div id="per_page_block">
               <%= label_tag(:limit, "Limit Per Page:") %>
-              <%= select_tag(:type,options_for_select(1...51)) %>
+              <%= select_tag(:limit,options_for_select(1...51,params[:limit])) %>
            </div>
           </div>
         <% end %>

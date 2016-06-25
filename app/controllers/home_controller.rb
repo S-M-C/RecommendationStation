@@ -1,7 +1,7 @@
 class HomeController < ShopifyApp::AuthenticatedController
   
   def index # will need to filter on pages
-    limit = 10
+    limit = params[:limit]
     keyword = params[:keyword]
     collection = params[:collection]
     type = params[:type]
