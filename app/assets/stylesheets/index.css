@@ -7,7 +7,6 @@ table {
     border-collapse: collapse; 
     border-spacing: 0; 
     width: 89vw;
-    height: 20vw; 
 }
 
 td, th { 
@@ -19,6 +18,7 @@ th {
 background: #e6e6e6;  /* Darken header a bit */
 font-weight: bold;
 color: #3366ff;
+height: 55px;
 }
 
 td {
