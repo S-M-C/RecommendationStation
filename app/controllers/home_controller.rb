@@ -1,49 +1,65 @@
 class HomeController < ShopifyApp::AuthenticatedController
   
   def index # will need to filter on pages
-    limit = params[:limit]
+    limit = params[:limit].to_i
     keyword = params[:keyword]
     collection = params[:collection]
     type = params[:type]
+    page = params[:page].to_i
+
+    if limit == 0
+      limit += 1
+    end
 
     # add each non empty field to filter calls
     @collections = ShopifyAPI::CustomCollection.find(:all).map{|collection| [collection.title]}.uniq.delete_if{|type| type[0].nil? || type[0].empty?}
     @types = ShopifyAPI::Product.find(:all).map{|product| [product.product_type]}.uniq.delete_if{|type| type[0].nil? || type[0].empty?}
 
-    products_type = get_products_by_type(type, limit)
-    products_kwrd = get_products_by_kwrd(keyword, limit)
-    products_coll = get_products_by_coll(collection, limit)
+    products_type = get_products_by_type(type)
+    products_kwrd = get_products_by_kwrd(keyword)
+    products_coll = get_products_by_coll(collection)
 
     args = []
     for item in [products_type, products_coll, products_kwrd]
-      unless item.nil? # filtering is soooo close !
+      unless item.nil?
         args.append(item)
       end
     end
 
-    @products = intersect(args)
+    products_result = intersect(args)
+    # need to send products_result to index for paging
+    #params[:page] = products_result.length / limit
+    #page = params[:page]
+    pages = products_result.length / limit
+    @products = get_paged_result(products_result, page, limit)
     
   end
 
-  def get_products_by_kwrd(keyword, lim)
+  def get_paged_result(all_products, page_num, num_per_page)
+    print page_num
+    print "-------"
+    all_products[ ( (page_num-1) * num_per_page) .. ((page_num * num_per_page)-1) ]
+  end
+
+  def get_products_by_kwrd(keyword)
     unless keyword.nil? or keyword.empty?
       keyword.strip
     end
-    ShopifyAPI::Product.find(:all, :params => {:limit => lim, :title => keyword } )
+    ShopifyAPI::Product.find(:all, :params => { :title => keyword } )
   end
 
-  def get_products_by_type(type, lim)
+  def get_products_by_type(type)
     unless type.nil? or type.empty?
-      result = ShopifyAPI::Product.find(:all, :params => {:limit => lim, :product_type => type } )
+      result = ShopifyAPI::Product.find(:all, :params => { :product_type => type } )
     else
       result = nil
     end
     result
   end
 
-  def get_products_by_coll(collection, lim)
+  def get_products_by_coll(collection)
     unless collection.nil? or collection.empty?
-      current_collection = ShopifyAPI::CustomCollection.find(:all, :params => {:limit => lim, :title => collection })[0]
+      current_collection = ShopifyAPI::CustomCollection.find(:all, :params => { :title => collection })[0]
       result = current_collection.products
     else
       result = nil

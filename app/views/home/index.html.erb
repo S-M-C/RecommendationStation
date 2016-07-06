@@ -34,6 +34,10 @@
               <%= label_tag(:limit, "Limit Per Page:") %>
               <%= select_tag(:limit,options_for_select(1...51,params[:limit])) %>
            </div>
+            <div id="paging_block">
+              <%= label_tag(:page, "Current Page:") %>
+              <%= select_tag(:page,options_for_select(1...@products.count,params[:page])) %>
+           </div>
           </div>
         <% end %>
 
