@@ -31,12 +31,12 @@
             <%= select_tag(:type,options_for_select(@types,params[:type]),{:include_blank => 'Any'}) %>
             </div>
             <div id="per_page_block">
-              <%= label_tag(:limit, "Limit Per Page:") %>
-              <%= select_tag(:limit,options_for_select(1...51,params[:limit])) %>
+              <%= label_tag(:limit, "Limit Per Page:") %> <!-- fix on_change to only work for change in selection. Fix partial paging too~ !-->
+              <%= select_tag(:limit,options_for_select(1...51,params[:limit]), :onchange => (params[:page] = 1)) %>
            </div>
             <div id="paging_block">
               <%= label_tag(:page, "Current Page:") %>
-              <%= select_tag(:page,options_for_select(1...@products.count,params[:page])) %>
+              <%= select_tag(:page,options_for_select(1...(@products_total.count/params[:limit].to_i)+1,params[:page])) %>
            </div>
           </div>
         <% end %>
